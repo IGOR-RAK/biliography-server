@@ -18,6 +18,9 @@ app.use(
 
 app.use('/user', require('./routes/userRouter'));
 app.use('/api', require('./routes/upload'));
+app.use('/api', require('./routes/yearRouter'));
+app.use('/api', require('./routes/cardRouter'));
+app.use('/api', require('./routes/itemRouter'));
 
 
 // Connect to mongodb
