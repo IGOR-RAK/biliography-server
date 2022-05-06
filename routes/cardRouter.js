@@ -5,7 +5,16 @@ const authAdmin = require('../middleware/authAdmin')
 
 
 router.route('/card')
-    .get(auth, authAdmin,cardCtrl.getCards)
+    .get(
+        // auth, authAdmin
+        // ,
+        cardCtrl.getCards)
+    .post(auth, authAdmin, cardCtrl.createCard)
+
+router.route('/card/:id')
+    .get(
+      
+        cardCtrl.getCardsByYear)
     .post(auth, authAdmin, cardCtrl.createCard)
 
 router.route('/card/:id')

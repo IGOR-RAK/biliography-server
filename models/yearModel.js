@@ -8,6 +8,10 @@ const yearSchema = new mongoose.Schema(
         trim: true,
         unique: true
     },
+    isActive:{
+      type:Boolean,
+      required: true,
+    }
    
   },
 

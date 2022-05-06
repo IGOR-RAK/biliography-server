@@ -6,12 +6,19 @@ const cardSchema = new mongoose.Schema(
         type: String,
         required: true,
         trim: true,       
-    },
-    img_src:{
+    },   
+   
+    public_id:{
         type: String,
         required: true,
         unique: true
     },
+    url:{
+        type: String,
+        required: true,
+        unique: true
+    },
+
     letter:{
         type: String,
         required: true

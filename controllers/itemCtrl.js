@@ -1,6 +1,7 @@
 const Items = require('../models/itemModel')
 const Cards = require('../models/cardModel')
 
+
 const itemCtrl = {
     getItems: async(req, res) =>{
         try {
@@ -15,11 +16,16 @@ const itemCtrl = {
             // if user have role = 1 ---> admin
             // only admin can create , delete and update category
             const {title} = req.body;
-            const item = await Items.findOne({title})
-            if(item) return res.status(400).json({msg: "Ten rok już istnieje."})
-            const newItem = new Items ({title})
-            await newItem.save()
-            res.json({msg: "Powstał nowy rok"})
+            const item = await Items.findOne({title})           
+            if(item) {return  res.json({msg: "Ten deskryptor już istnieje."})
+                res.status(400).json({msg: "Ten deskryptor już istnieje."})
+            }
+            else {
+                const newItem = new Items ({title})
+                await newItem.save()
+                res.json({msg: "Powstał nowy dyskryptor"})
+            }
+          
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -42,8 +48,10 @@ const itemCtrl = {
     },
     updateItem: async(req, res) =>{
         try {
-            const {title} = req.body;
+            const {title} = req.body;           
+            const item = await Items.findById(req.params.id);       
             await Items.findOneAndUpdate({_id: req.params.id}, {title})
+            await Cards.updateMany({item:item.title}, { item: title });
             res.json({msg: "Rok został zaktualizowany"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
