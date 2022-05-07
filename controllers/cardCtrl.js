@@ -10,8 +10,9 @@ const cardCtrl = {
         }
     },
     getCardsByYear: async(req, res) =>{
-        try {
-             const cards = await Cards.find({year:req.params.id})          
+        try {          
+           
+            const cards = await Cards.find({year:req.params.id})          
             res.json(cards)
             
         } catch (err) {
@@ -22,8 +23,7 @@ const cardCtrl = {
         try {
             // if user have role = 1 ---> admin
             // only admin can create , delete and update category
-            const {author,public_id,url,letter,note,item,year,link} = req.body;
-            // console.log(req.body);
+            const {author,public_id,url,letter,note,item,year,link} = req.body;          
             const card = await Cards.findOne({url})
             if(card) return res.status(400).json({msg: "Ta kartka już istnieje."})
             const newCard = new Cards ({author,public_id,url,letter,note,item,year,link})

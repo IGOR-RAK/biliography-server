@@ -3,6 +3,9 @@ const yearCtrl = require('../controllers/yearCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 
+router.route('/active')
+    .get(auth, authAdmin,yearCtrl.getActiveYears)
+  
 
 router.route('/year')
     .get(auth, authAdmin,yearCtrl.getYears)

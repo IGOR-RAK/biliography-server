@@ -11,17 +11,16 @@ const yearCtrl = {
     getYears: async(req, res) =>{
         try {
             const years = await Years.find()
-            console.log(years)
-            // const map = years.filter(year=>{
-            //    const cards = getYear(year)
-            //    console.log("cards",cards)
-               
-            //     return cards
-            // })
-
-
-
             res.json(years)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    getActiveYears: async(req, res) =>{
+        try {
+            const years = await Years.find()
+            const activeYears = years.filter(year=>year.isActive)
+            res.json(activeYears)
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
