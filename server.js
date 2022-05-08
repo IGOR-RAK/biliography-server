@@ -9,7 +9,7 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials:true,origin:"http://localhost:3000"}));
+app.use(cors({credentials:true,origin:"https://biblio-admin.vercel.app/"}));
 // app.use(cors());
 app.use(
   fileUpload({
