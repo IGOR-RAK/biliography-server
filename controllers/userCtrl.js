@@ -73,6 +73,7 @@ const userCtrl = {
   },
   logout: async (req, res) =>{
     try {
+        console.log("logout")
         res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
         return res.json({msg: "Logged out"})
     } catch (err) {
@@ -83,7 +84,7 @@ const userCtrl = {
     try {
         
         const rf_token = req.cookies.refreshtoken;
-        console.log("rf_token",rf_token)
+        // console.log("rf_token",rf_token)
         if(!rf_token) return res.status(400).json({msg: "Please Login or Register"})
 
         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) =>{
